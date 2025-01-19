@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    search
+{% endblock %}
+
+{% block main %}
+    <form class ="search-form" action="/search" method="get">
+        <label class="search-field" for = "title">Title</label>
+        <input id="title" name="title" autocomplete="off" placeholder="Title" type="text">
+        <label class="search-field" for = "type">Type</label>
+        <select id="type" name="type">
+            <option  value=""></option>
+            <option  value="movie">movie</option>
+            <option  value="series">series</option>
+        </select>
+        <label class="search-field" for = "year">Title</label>
+        <input id="year" name="year" autocomplete="off" placeholder="Year" type="number">
+        <button type="submit">search</button>
+   </form>
+
+   <div style="padding: 20px 0px 20px 0px;font-size: 20px; text-align: center  ;">{{ message }}</div>
+   <div>
+        {% if matches is not none %}
+        <table class="search-table">
+            <tbody>
+                <tr>
+                    <th class="img">IMAGE</th>
+                    <th class="title">TITLE</th>
+                    <th class="score">SCORE</th>
+                    <th class="type">TYPE</th>
+                    <th class="start">START</th>
+                    <th class="finish">FINISH</th>
+                </tr>
+                {% for row in matches %}
+                <tr>
+                    <td>
+                        {% if row[3] is none %}
+                        <a href="show?id={{ row[0] }}"><img src="static/images/no_image.png" /></a>
+                        {% else: %}
+                            <a href="show?id={{ row[0] }}"><img src = " {{row[1]}}" /></a>
+                        {% endif %}    
+                    </td>
+                    <td><a href="show?id={{ row[0] }}">{{row[2]}}</a></td>
+                    <td>
+                        {% if row[3] is none %}
+                            N/A
+                        {% else: %}
+                            {{row[3]}}
+                        {% endif %}    
+                    </td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+   </div>
+{% endblock %}

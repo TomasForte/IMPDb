@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <title>medialist {% block title %}{% endblock %}</title>
+        <link href="/static/style.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <div id="content">
+            <div class="menu">
+                <div class =  "menu_left">
+                    <div class="logo" style="display:inline-block; padding:5px 0px 0px 10px"><img src="static/images/logo2.png" height="40"/></div>
+                    <ul class="menu_list">
+                        <il class="menu_item"><a href="/">Home</a></il>
+                        <il class="menu_item">
+                            <a href="#">Shows</a>
+                            <ul class = "menu_dropdown">
+                                <li> <a href="/topshows">Top Shows</a></li>
+                                <li> <a href="/search">Search</a></li>
+                            </ul>
+                        </il>
+                        <il class="menu_item">
+                            <a href="#">Movies</a>
+                            <ul class = "menu_dropdown">
+                                <li> <a href="/topmovies">Top Movies</a></li>
+                                <li> <a href="/search">Search</a></li>
+                            </ul>
+                        </il>
+                    </ul>
+                </div>
+                <div class = "menu_right">
+                    <div class="user-info">
+                        {% if session["user_id"] %}
+                            <a class="menu-user-pic"></a>
+                            <div class ="menu_item">
+                                <a href="#" id="username">{{ session["username"] }}</a>
+                                <ul class="menu_dropdown username">
+                                    <li><a href="/profile?id={{session['user_id']}}">Profile</a></il>
+                                    <li><a href="/logout">Log-out</a></il>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class ="menu_item">
+                                <a href="/login" id="login">Login</a>
+                            </div>
+                            <div class ="menu_item">
+                                <a href="/register" id="register">Register</a>
+                            </div>
+                                
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="page_content">
+                {% block main %}{% endblock %}
+
+            </div>
+
+
+        </div>
+
+        <footer>
+            <div class = "bottom_menu">
+                CS50 Final Project
+            </div>
+            
+        </footer>
+
+    </body>

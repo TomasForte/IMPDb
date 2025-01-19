@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Top Movies
+{% endblock %}
+
+{% block main %}
+    <div class = "top-list">
+        <h1> TOP SHOWS</h1>
+        {% if previous is not none %}
+            <a href="topmovies?offset={{previous}}"><button class="previous" type="button">previous 5</button></a>
+        {% endif %}
+        {% if next is not none %}
+            <a href="topmovies?offset={{next}}"><button class="next" type="button">next 5</button></a>
+        {% endif %} 
+
+
+        <table>
+            <tbody>
+                <tr>
+                    <th class="rank">RANK</th>
+                    <th class="title">TITLE</th>
+                    <th class="score">SCORE</th>
+                </tr>
+                {% for movie in listmovies %}
+                    <tr>
+                        <td>{{movie[0]}}</td>
+                        <td>
+                            <div class="title_in_rank">
+                                <a href="show?id={{ movie[1] }}"><img src = "{{ movie[3] }}" alt="test"/></a>
+                                <div> <a href="show?id={{ movie[1] }}">{{movie[2]}}</a></div>
+                            </div>
+                        </td>
+                        <td>{{movie[4]}}</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+        {% if previous is not none %}
+            <a href="topmovies?offset={{previous}}"><button class="previous" type="button">previous 5</button></a>
+        {% endif %}
+        {% if next is not none %}
+            <a href="topmovies?offset={{next}}"><button class="next" type="button">next 5</button></a>
+        {% endif %} 
+    </div>
+
+{% endblock %}

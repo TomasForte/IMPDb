@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <div class="section">
+        <div class="section_title">
+            <div>Recent Releases Movies</div>
+            <ul class="section_content">
+                {% for entry in new_releases_movies%}
+                    <il class="content">
+                        <a  href="show?id={{ entry[0] }}">
+                            <div>
+                                {% if entry[9] is none %}
+                                    <img src="static/images/no_image.png" />   
+                                {% else %}
+                                    <img src = "{{ entry[9] }}" alt="test" /> 
+                                {% endif %}
+                                   
+                            </div>
+                        </a>  
+                        <a href="show?id={{ entry[0] }}" class="title"> {{ entry[1] }} </a>
+                    </il>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section_title">
+            <div>Recent Releases Shows</div>
+            <ul class="section_content">
+                {% for entry in new_releases_shows%}
+                    <il class="content">
+                        <a  href="show?id={{ entry[0] }}">
+                            <div>
+                                {% if entry[9] is none %}
+                                    <img src="static/images/no_image.png" />   
+                                {% else %}
+                                    <img src = "{{ entry[9] }}" alt="test" /> 
+                                {% endif %}
+                                   
+                            </div>
+                        </a>  
+                        <a href="show?id={{ entry[0] }}" class="title"> {{ entry[1] }} </a>
+                    </il>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section_title">
+            <div>Trending Movies</div>
+            <ul class="section_content">
+                {% for entry in trending_movies%}
+                    <il class="content">
+                        <a  href="show?id={{ entry[0] }}">
+                            <div>
+                                {% if entry[9] is none %}
+                                    <img src="static/images/no_image.png" />   
+                                {% else %}
+                                    <img src = "{{ entry[2] }}" alt="test" /> 
+                                {% endif %}
+                                   
+                            </div>
+                        </a>  
+                        <a href="show?id={{ entry[0] }}" class="title"> {{ entry[1] }} </a>
+                    </il>
+                {% endfor %}
+        </div>
+    </div>
+    <div class="section">
+        <div class="section_title">
+            <div>Trending Shows</div>
+            <ul class="section_content">
+                {% for entry in trending_shows%}
+                    <il class="content">
+                        <a  href="show?id={{ entry[0] }}">
+                            <div>
+                                {% if entry[9] is none %}
+                                    <img src="static/images/no_image.png" />   
+                                {% else %}
+                                    <img src = "{{ entry[2] }}" alt="test" /> 
+                                {% endif %}
+                                   
+                            </div>
+                        </a>  
+                        <a href="show?id={{ entry[0] }}" class="title"> {{ entry[1] }} </a>
+                    </il>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+

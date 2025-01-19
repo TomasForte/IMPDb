@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<div class="big_title">{{ username }}'s Profile</div>
+    <div class="user-stats">
+        <h1 style = "text-align: center;">Stats</h1>
+        <div class="types">
+        {% for type in types %}
+            <div class="stat">
+                {{ type[0] }} : {{ type[1] }}
+            </div>
+        {% endfor %}
+        </div>
+    
+        <div class="status">
+            {% for row in status %}
+                <div class="stat">
+                    {{ row[0] }} : {{ row[1] }}
+                </div>
+            {% endfor %}
+        
+        </div>
+
+
+    </div>
+    <div class="user-list">
+        <h1 style = "text-align: center;">List</h1>
+        <form class ="search-form" action="/profile?id={{session['user_id']}}" method="post">
+            <label class="search-field" for = "type">Type</label>
+            <select id="type" name="type">
+                <option  value=""></option>
+                <option  value="movie">movie</option>
+                <option  value="series">series</option>
+            </select>
+            <label class="search-status" for = "status">Status</label>
+            <select id="status" name="status">
+                <option selected value="">status</option>
+                <option>Watching</option>
+                <option>Planning to watch</option>
+                <option>Completed</option>
+                <option>Dropped</option>
+            </select>
+
+            <button type="submit">search</button>
+       </form>
+       <div class = "list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                {% if user_list is not none %}
+                    <tbody>
+                        {% for n in user_list %}
+                        <tr>
+                            <td class="title">{{n[0]}}</td>
+                            <td class="type">{{n[1]}}</td>
+                            <td class="score">{{n[2]}}</td>
+                            <td class="status">{{n[3]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endif %}
+            </table>
+       </div>
+    </div>
+{% endblock %}
+
